@@ -45,14 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="flex items-center gap-4 text-sm text-slate-600">
               <Link href="/" className="hover:text-slate-900">排行</Link>
               <Link href="/apps" className="hover:text-slate-900">应用</Link>
-              <a
-                href="https://openrouter.ai/rankings"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="hidden sm:inline text-xs text-slate-400 hover:text-slate-600"
-              >
-                源站 ↗
-              </a>
             </nav>
           </div>
         </header>
