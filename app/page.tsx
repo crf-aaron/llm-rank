@@ -22,7 +22,7 @@ export default async function Home() {
     <div className="flex flex-col gap-5">
       <section className="pt-2">
         <h1 className="text-xl md:text-2xl font-semibold text-slate-900">
-          今日模型排行
+          大模型用量排行
         </h1>
         <p className="mt-1 text-sm text-slate-500">
           按 OpenRouter 路由的真实 token 用量排序

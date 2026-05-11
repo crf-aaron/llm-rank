@@ -1,9 +1,10 @@
 import { fetchRankings } from '@/lib/openrouter/scrape';
 import { AppList } from '@/components/AppList';
+import { formatDate } from '@/lib/format';
 
 export const revalidate = 3600;
 
-export const metadata = { title: '今日热门应用' };
+export const metadata = { title: '热门应用' };
 
 export default async function AppsPage() {
   let snapshot;
@@ -15,15 +16,21 @@ export default async function AppsPage() {
   }
 
   const rows = snapshot?.apps ?? [];
+  const latest = snapshot?.latestDate ?? '';
 
   return (
     <div className="flex flex-col gap-5">
       <section className="pt-2">
         <h1 className="text-xl md:text-2xl font-semibold text-slate-900">
-          今日热门应用
+          热门应用排行
         </h1>
         <p className="mt-1 text-sm text-slate-500">
-          调用 OpenRouter 次数最多的第三方应用（当日）
+          调用 OpenRouter 次数最多的第三方应用
+          {latest && (
+            <>
+              ，数据日期：<span className="tabular-nums">{formatDate(latest)}</span>
+            </>
+          )}
         </p>
       </section>
 
