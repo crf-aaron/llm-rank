@@ -24,6 +24,7 @@ function lookupMeta(
 
 export function RankingTable({ rows, limit = 50, metaMap }: Props) {
   const items = rows.slice(0, limit);
+  const hasChangeData = items.some((r) => r.changePct !== null);
 
   if (!items.length) {
     return (
@@ -66,9 +67,11 @@ export function RankingTable({ rows, limit = 50, metaMap }: Props) {
                 <div className="text-sm font-semibold text-slate-900 tabular-nums">
                   {formatTokens(r.tokens)}
                 </div>
-                <div className="text-[11px]">
-                  <ChangeIndicator change={r.changePct} />
-                </div>
+                {hasChangeData && (
+                  <div className="text-[11px]">
+                    <ChangeIndicator change={r.changePct} />
+                  </div>
+                )}
               </div>
             </li>
           );
@@ -86,7 +89,9 @@ export function RankingTable({ rows, limit = 50, metaMap }: Props) {
               <th className="text-right font-medium py-2">Tokens</th>
               <th className="text-right font-medium py-2 hidden lg:table-cell">请求数</th>
               <th className="text-right font-medium py-2">占比</th>
-              <th className="text-right font-medium py-2 pr-2">昨日变化</th>
+              {hasChangeData && (
+                <th className="text-right font-medium py-2 pr-2">昨日变化</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -123,9 +128,11 @@ export function RankingTable({ rows, limit = 50, metaMap }: Props) {
                   <td className="py-2.5 pr-3 text-right tabular-nums text-slate-500">
                     {formatShare(r.share)}
                   </td>
-                  <td className="py-2.5 pr-2 text-right">
-                    <ChangeIndicator change={r.changePct} />
-                  </td>
+                  {hasChangeData && (
+                    <td className="py-2.5 pr-2 text-right">
+                      <ChangeIndicator change={r.changePct} />
+                    </td>
+                  )}
                 </tr>
               );
             })}
